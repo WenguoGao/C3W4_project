@@ -5,3 +5,5 @@ download.file(Url, destfile = "./data/data.zip", method = "curl")
 unzip("./data/data.zip")
 
 test_data = read.table("./UCI HAR Dataset/test/X_test.txt")
+
+#
