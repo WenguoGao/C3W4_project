@@ -29,12 +29,11 @@ merged_data = cbind(whole_subject, whole_labels, whole_data)
 
 
 # 2. Extracts only the measurements on the mean and standard deviation for each measurement. 
-        ## find column column number for mean and std including "subject" and "activity_code" columns
+        ## find column number for mean and std including "subject" and "activity_code" columns
 mean_std_list = grep("subject|activity_code|mean|std", names(merged_data))
         
         ## extract the data sets through column numbers
 mean_std_data = merged_data[, mean_std_list]
-#dt1 = mean_std_data
 
 
 # 3. Uses descriptive activity names to name the activities in the data set
@@ -46,8 +45,9 @@ mean_std_data = mean_std_data %>% relocate(activity_name, .after = activity_code
 
 
 # 4. Appropriately labels the data set with descriptive variable names. 
+names(mean_std_data) = gsub("Acc", "Accelerometer", names(mean_std_data))
+names(mean_std_data) = gsub("Gyro", "Gyroscope", names(mean_std_data))
 names(mean_std_data) = gsub("^t", "Time", names(mean_std_data))
-names(mean_std_data) = gsub("Acc", "Acceleration", names(mean_std_data))
 names(mean_std_data) = gsub("Mag", "Magnitude", names(mean_std_data))
 names(mean_std_data) = gsub("^f", "Frequency", names(mean_std_data))
 names(mean_std_data) = gsub("mad", "MedianAbsoluteDeviation", names(mean_std_data))
@@ -61,9 +61,9 @@ names(mean_std_data) = gsub("meanFreq", "MeanFrequencyWeightedAverage", names(me
 
 # 5. From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject.
         ## group the data by subjects first then activity_name
-        ## summarise all the rest variable and apply mean() function to them
+        ## summarize all the rest variable and apply mean() function to them
 tidy_data = mean_std_data %>% group_by(subject, activity_name) %>% summarise_all(mean)
-
+write.table(tidy_data, "tidy_data.txt", row.names = F)
 
 
 
