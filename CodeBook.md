@@ -1,9 +1,3 @@
-1. Information about the variables (including units) in the data set not contained in the tidy data.
-2. Information about the summary choices you made.
-3. Information about the experimental study design you used.
-
-modifies and updates the available codebooks with the data to indicate all the variables and summaries calculated, along with units, and any other relevant information.
-
 The run_analysis.R script downloads data from https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip, and then followed by the following steps to clean the data.
 
 1. Download the dataset 
